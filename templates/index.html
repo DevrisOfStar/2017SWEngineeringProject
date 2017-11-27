@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang = "ko">
+<Head>
+
+<title>
+  {% if username %}
+    About My Dog - Hello, {{username}}
+  {% else %}
+    About My Dog
+  {% endif %}
+</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<strong>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
+</strong>
+
+</Head>
+
+<body>
+  <Header>
+      <div class="logo">
+      <img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home"/>
+      </div>
+      <div class="search">
+          <input type="text" id="searchBar" class="form-control" placeholder="Search">
+          <button type="submit" id="mySearch" onclick="location.href='#'">검색</button>
+      </div>
+      <div class="login">
+        <button type="submit" id="Login" action ="{{url_for('login')}}">Login</button>
+        <button type="submit" id="SignUp" action ="{{url_for('signup')}}">SignUp</button>
+        </form>
+      </div>
+      <div class = "menu">
+      <strong>
+          <ul>
+            <!-- temp link -->
+            <li><a href="{{url_for('admin')}}">베스트상품</a></li>
+            <li><a href="#">애완용품</a></li>
+            <li><a href="{{url_for('community')}}">COMMUNITY</a></li>
+            <li><a href="{{url_for('mypage')}}">MY PAGE</a></li>
+          </ul>
+        </strong>
+   </div>
+
+  </Header>
+
+  <nav>
+
+  Side Menu
+  <!--
+	<ul>
+	    <li><a href="#">Product</a></li>
+    </ul>
+	-->
+  </nav>
+
+  <section>
+	<div class="ad">
+	ad
+	<!--	<img src="" height="100%" title="Ad" /> -->
+	</div>
+	<div class="bestproduct">
+		<dl>bestproduct</dl>
+		<!--
+		<a href="#"> <img src="./logo.png" width="30%" title="B1" /> </a>
+		<a href="#"> <img src="./logo.png" width="30%" title="B2" /> </a>
+		<a href="#"> <img src="./logo.png" width="30%" title="B3" /> </a>
+		<dl></dl>
+		<a href="#"> <img src="./logo.png" width="30%" title="B4" /> </a>
+		<a href="#"> <img src="./logo.png" width="30%" title="B5" /> </a>
+		<a href="#"> <img src="./logo.png" width="30%" title="B6" /> </a>
+		-->
+	</div>
+	<div class="community">
+		community
+	<!--
+		<table border="2px solid #333">
+		<tr class="aa">
+		<th><span>번호</span></th>
+		<th><span>제목</span></th>
+		<th><span>작성자</span></th>
+		<th><span>작성일</span></th>
+		<th><span>조회수</span></th>
+		</tr>
+		<tr> <td>1</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td></tr>
+		<tr> <td>2</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td></tr>
+		</table>
+	-->
+	</div>
+	<div class="cart">
+		cart
+	</div>
+  </section>
+
+
+  <footer>
+      About My Dog
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang = "ko">
+<Head>
+<title>About My Dog</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	-->
+<strong>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/board.css') }}">
+</strong>
+
+</Head>
+
+<body>
+  <Header>
+      <div class="logo">
+        <img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" />
+      </div>
+      <div class="search">
+          <input type="text" id="searchBar" class="form-control" placeholder="Search">
+          <button type="submit" id="mySearch" onclick="location.href='#'">검색</button>
+      </div>
+      <div class="login">
+        <button type="button" id="Login" onclick="location.href='#'">Login</button>
+        <button type="button" id="SignUp" onclick="location.href='#'">SignUp</button>
+      </div>
+      <div class = "menu">
+      <strong>
+          <ul>
+            <li><a href="#">베스트상품</a></li>
+            <li><a href="#">애완용품</a></li>
+            <li><a href="{{url_for('community')}}">COMMUNITY</a></li>
+            <li><a href="{{url_for('mypage')}}">MY PAGE</a></li>
+          </ul>
+        </strong>
+   </div>
+
+  </Header>
+
+  <div id="page-wrapper">
+  <!-- 사이드바 -->
+  <nav id="page-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <font color="white">My Page</font>
+      </li>
+      <li><a href="{{url_for('myorder')}}">주문내역</a></li>
+      <li><a href="{{url_for('myrevise')}}">회원정보수정</a></li>
+    </ul>
+  </nav>
+  <!-- /사이드바 -->
+
+	<section border="1">
+	<div class="list"  >
+	<p>
+	<h5 align="left">▶ 회원정보 수정</h5>
+	<p align="left">
+	<hr/>
+	<div class="container">
+	<div class="table-responsive">
+	<table class="table table-bordered table-condensed">
+
+    	<tbody>
+    		<tr>
+                <th>ID</th>
+                <td>id</td >
+            </tr>
+            <tr>
+                <th>비밀번호 </th>
+                <td><input type="text" placeholder="비밀번호를 입력하세요. (영어 소문자, 숫자 포함 4-12자리)" name="password" class="form-control"/></td>
+            </tr>
+            <tr>
+                <th>비밀번호 확인</th>
+                <td><input type="text" placeholder="비밀번호를 다시 입력하세요. " name="password2" class="form-control"/></td>
+			</tr>
+
+            <tr>
+                <th>이름</th>
+                <td><input type="text" placeholder="이름을 입력하세요. " name="name" class="form-control"/></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td><input type="zipcode" placeholder="ZipCode " name="zipcode" class="form-control">
+                <input type="text" placeholder="Address1 " name="ad1" class="form-control">
+                <input type="text" placeholder="Address2 " name="ad2" class="form-control"></td>
+            </tr>
+             <tr>
+                <th>전화번호</th>
+                <td><input type="text" placeholder="전화번호를 입력하세요. " name="phonenum" class="form-control"/></td>
+            </tr>
+             <tr>
+                <th>E-mail</th>
+                <td><input type="text" placeholder="이메일 주소를 입력하세요. " name="email" class="form-control"/></td>
+            </tr>
+
+	    <tr>
+                <td style="border:0px" solid=white; align="right">
+		<td style="border:0px" solid=white; align="right">
+		<button class="btn btn-sm pull-right" id="cancel_revise" onclick="location.href='mypage.html#'">취소</button> </span>
+		<button class="btn btn-sm pull-right" onclick="location.href='my_revise.html#'" type="button">저장</button></span>
+		<button class="btn btn-sm pull-right" id="out" onclick="location.href='#'">탈퇴</button> </span>
+                </td>
+            </tr>
+    </tbody>
+</table>
+	<hr/>
+	</div>
+	</div>
+
+
+
+	</section>
+
+
+  <footer>
+      About My Dog
+  </footer>
+</body>
+
+</html>

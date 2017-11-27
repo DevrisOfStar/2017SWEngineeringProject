@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang = "ko">
+<Head>
+
+<title>About My Dog</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<strong>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/index.css"/>
+  <strong><link rel="stylesheet" href="{{ url_for('static', filename='css/board.css') }}"></strong>
+</strong>
+
+</Head>
+
+<body>
+  <Header>
+      <div class="logo">
+        <img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" />
+      </div>
+      <div class="search">
+          <input type="text" id="searchBar" class="form-control" placeholder="Search">
+          <button type="submit" id="mySearch" onclick="location.href='#'">검색</button>
+      </div>
+      <div class="login">
+        <button type="button" id="Login" onclick="location.href='#'">Login</button>
+        <button type="button" id="SignUp" onclick="location.href='#'">SignUp</button>
+      </div>
+      <div class = "menu">
+      <strong>
+          <ul>
+            <li><a href="#">베스트상품</a></li>
+            <li><a href="#">애완용품</a></li>
+            <li><a href="{{url_for('community')}}">COMMUNITY</a></li>
+            <li><a href="#">MY PAGE</a></li>
+          </ul>
+        </strong>
+   </div>
+
+  </Header>
+
+  <nav>
+
+  Side Menu
+  <!--
+	<ul>
+	    <li><a href="#">Product</a></li>
+    </ul>
+	-->
+  </nav>
+
+  <section>
+	<div class="read">
+	<p>
+	<h5>▶ COMMNUNITY</h5>
+	공유하고 싶은 내용을 자유롭게 작성해 주세요.
+	<hr/>
+	<p>
+	<div class="container">
+	<div class="table-responsive">
+	<table class="table table-bordered table-condensed">
+
+    	<tbody>
+            <tr>
+                <th >작성자 </th>
+                <td>집사님</td>
+                <th>작성날짜 </th>
+                <td>2017.11.27</td>
+            </tr>
+            <tr>
+                <th>제목 </th>
+                <td>좋은정보 남겨요!</td>
+                <th>조회수 </th>
+                <td>1</td>
+            </tr>
+            <tr>
+		<th colspan="4">내용</td>
+            </tr>
+            <tr>
+                <td colspan="4"  height="300" align="left"> 안녕하세요! <p>반갑습니다^^ </td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+		<td style="border:0px" solid=white; align="left"><button class="btn btn-sm pull-right" onclick="location.href='community.html#'" type="button">글목록</button></span>
+		 	<button class="btn btn-sm pull-right" id="writer" onclick="location.href='modify.html#'">수정</button> </span>
+                </td>
+		<td style="border:0px" solid=white;> </td>
+		<td style="border:0px" solid=white;> </td>
+                <td style="border:0px" solid=white; align="right">
+		 	<button class="btn btn-sm pull-right" id="writer" onclick="location.href='#'">삭제</button> </span>
+                </td>
+            </tr>
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+  </section>
+
+
+  <footer>
+      About My Dog
+  </footer>
+</body>
+
+</html>

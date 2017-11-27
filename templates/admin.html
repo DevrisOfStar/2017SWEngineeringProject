@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang = "ko">
+<Head>
+<title>About My Dog</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<strong>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/board.css') }}">
+</strong>
+
+</Head>
+
+<body>
+  <Header>
+      <div class="logo">
+        <img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home"/>
+      </div>
+      <div class="search">
+          <input type="text" id="searchBar" class="form-control" placeholder="Search">
+          <button type="submit" id="mySearch" onclick="location.href='#'">검색</button>
+      </div>
+      <div class="login">
+        <button type="button" id="Admin" onclick="location.href={{url_for('admin')}}">Admin</button>
+        <button type="button" id="Logout" onclick="location.href='#'">Logout</button>
+      </div>
+      <div class = "menu">
+      <strong>
+          <ul>
+            <li><a href="#">베스트상품</a></li>
+            <li><a href="#">애완용품</a></li>
+            <li><a href="{{url_for('community')}}">COMMUNITY</a></li>
+            <li><a href="{{url_for('mypage')}}">MY PAGE</a></li>
+          </ul>
+        </strong>
+   </div>
+
+  </Header>
+  <div id="page-wrapper">
+  <!-- 사이드바 -->
+  <nav id="page-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <font color="white">Admin</font>
+      </li>
+      <li><a href="{{url_for('adminitem')}}">상품관리</a></li>
+      <li><a href="{{url_for('adminmember')}}">회원관리</a></li>
+      <li><a href="{{url_for('adminboard')}}">게시판관리</a></li>
+    </ul>
+  </nav>
+  <!-- /사이드바 -->
+
+
+  <footer>
+      About My Dog
+  </footer>
+</body>
+
+</html>
