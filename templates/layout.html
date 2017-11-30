@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html>
 <Head>
-<title>My Homepage</title>
+<title>
+    {% if username %}
+      About My Dog - Hello, {{username}}
+    {% else %}
+      About My Dog - Not Logged
+    {% endif %}
+</title>
 
-<strong><link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"></strong>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <strong>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/board.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/page.css') }}">
+  </strong>
 
 </Head>
 
 <body>
-
-
        <Header>
            <div class="logo">
              <img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" />
@@ -18,10 +30,23 @@
                <input type="text" id="searchBar" class="form-control" placeholder="Search">
                <button type="submit" id="mySearch" onclick="location.href='#'">검색</button>
            </div>
-           <div class="login">
-             <button type="button" id="Login" onclick="location.href='#'">Login</button>
-             <button type="button" id="SignUp" onclick="location.href='#'">SignUp</button>
+           {% if username %} <!-- 로그인 상태 -->
+           <div class="logout" style="float:right;padding-top:20px;">
+             <form action ="/logout/" style="float:right;display:inline;">
+               <button type="submit" id="Logout">Logout</button>
+             </form>
+             {{username}}님 환영합니다.
            </div>
+           {% else %}
+           <div class="login">
+         <form action ="/login/" style="display:inline;">
+           <button type="submit" id="Login">Login</button>
+         </form>
+         <form action ="/signup/" style="display:inline;">
+           <button type="submit" id="SignUp">SignUp</button>
+         </form>
+         </div>
+             {% endif %}
            <div class = "menu">
            <strong>
                <ul>
@@ -34,16 +59,6 @@
         </div>
 
        </Header>
-
-       <nav>
-
-       Side Menu
-       <!--
-       <ul>
-           <li><a href="#">Product</a></li>
-         </ul>
-       -->
-       </nav>
 
 
     {% block content%}

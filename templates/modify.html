@@ -17,16 +17,31 @@
 <body>
   <Header>
       <div class="logo">
+
         <img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" />
+        </form>
       </div>
       <div class="search">
           <input type="text" id="searchBar" class="form-control" placeholder="Search">
           <button type="submit" id="mySearch" onclick="location.href='#'">검색</button>
       </div>
-      <div class="login">
-        <button type="button" id="Login" onclick="location.href='#'">Login</button>
-        <button type="button" id="SignUp" onclick="location.href='#'">SignUp</button>
+      {% if username %} <!-- 로그인 상태 -->
+      <div class="logout" style="float:right;padding-top:20px;">
+        <form action ="/logout/" style="float:right;display:inline;">
+          <button type="submit" id="Logout">Logout</button>
+        </form>
+        {{username}}님 환영합니다.
       </div>
+      {% else %}
+      <div class="login">
+    <form action ="/login/" style="display:inline;">
+      <button type="submit" id="Login">Login</button>
+    </form>
+    <form action ="/signup/" style="display:inline;">
+      <button type="submit" id="SignUp">SignUp</button>
+    </form>
+    </div>
+        {% endif %}
       <div class = "menu">
       <strong>
           <ul>
@@ -62,6 +77,7 @@
 	<table class="table table-bordered table-condensed">
 
     	<tbody>
+        <form action="/community/modify/db/">
             <tr>
                 <th>제목: </th>
                 <td><input type="text" placeholder="제목을 입력하세요. " name="subject" class="form-control"/></td>
@@ -71,25 +87,20 @@
                 <td><textarea cols="50" rows="10" placeholder="내용을 입력하세요. " name="content" class="form-control"></textarea></td>
             </tr>
             <tr>
-                <th>첨부파일: </th>
-		<td align="left">
-    		<label for="exampleInputFile"></label>
-   		<input type="file" id="exampleInputFile">
-		</td >
-            </tr>
-            <tr>
                 <th>비밀번호: </th>
                 <td align="left"><input type="password" placeholder="4~10자" name="password" class="input-sm"/></td>
-		</td >
+		        </td >
             </tr>
 
 	    <tr>
-                <td style="border:0px" solid=white; align="right">
-                   <span class="input-group-btn pull-right"><button class="btn btn-sm pull-right" onclick="location.href='community.html#'" type="button">글목록</button></td>
-		<td style="border:0px" solid=white; align="right"><button class="btn btn-sm pull-right" onclick="location.href='#'" type="button">등록</button></span>
-		 	<button class="btn btn-sm pull-right" id="writer" onclick="location.href='community.html#'">취소</button> </span>
-                </td>
+          <td style="border:0px" solid=white; align="right">
+            <span class="input-group-btn pull-right"><button class="btn btn-sm pull-right" name="button" value="list">글목록</button></td>
+              <td style="border:0px" solid=white; align="right"><button class="btn btn-sm pull-right" name="button" value="modify">등록</button></span>
+                <button class="btn btn-sm pull-right" id="writer" name="button" value="cancel">취소</button> </span>
+                <td style="border:0px" solid=white;><input type="hidden" name="number" value={{number}}></td>
+              </td>
             </tr>
+          </form>
     </tbody>
 </table>
 </div>

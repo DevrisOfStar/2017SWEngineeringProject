@@ -28,10 +28,23 @@
           <input type="text" id="searchBar" class="form-control" placeholder="Search">
           <button type="submit" id="mySearch" onclick="location.href='#'">검색</button>
       </div>
-      <div class="login">
-        <button type="button" id="Login" onclick="location.href='#'">Login</button>
-        <button type="button" id="SignUp" onclick="location.href='#'">SignUp</button>
+      {% if username %} <!-- 로그인 상태 -->
+      <div class="logout" style="float:right;padding-top:20px;">
+        <form action ="/logout/" style="float:right;display:inline;">
+          <button type="submit" id="Logout">Logout</button>
+        </form>
+        {{username}}님 환영합니다.
       </div>
+      {% else %}
+      <div class="login">
+    <form action ="/login/" style="display:inline;">
+      <button type="submit" id="Login">Login</button>
+    </form>
+    <form action ="/signup/" style="display:inline;">
+      <button type="submit" id="SignUp">SignUp</button>
+    </form>
+    </div>
+        {% endif %}
       <div class = "menu">
       <strong>
           <ul>
@@ -66,52 +79,54 @@
 	<hr/>
 	<div class="container">
 	<div class="table-responsive">
-	<table class="table table-bordered table-condensed">
+  <form action= "/vertify/">
+    <table class="table table-bordered table-condensed">
 
-    	<tbody>
-    		<tr>
-                <th>ID</th>
-                <td>id</td >
+      <tbody>
+        <tr>
+          <th>ID</th>
+          <td>{{username}}</td >
+          </tr>
+          <tr>
+            <th>비밀번호 </th>
+            <td><input type="password" placeholder="비밀번호를 입력하세요. (영어 소문자, 숫자 포함 4-12자리)" name="password" class="form-control"/></td>
+          </tr>
+          <tr>
+            <th>비밀번호 확인</th>
+            <td><input type="password" placeholder="비밀번호를 다시 입력하세요. " name="password2" class="form-control"/></td>
+          </tr>
+
+          <tr>
+            <th>이름</th>
+            <td><input type="text" placeholder="이름을 입력하세요. " name="name" class="form-control"/></td>
+          </tr>
+          <tr>
+            <th>주소</th>
+            <td><input type="zipcode" placeholder="ZipCode " name="zipcode" class="form-control">
+              <input type="text" placeholder="Address " name="address1" class="form-control">
+              <input type="text" placeholder="detail Address " name="address2" class="form-control"></td>
             </tr>
             <tr>
-                <th>비밀번호 </th>
-                <td><input type="text" placeholder="비밀번호를 입력하세요. (영어 소문자, 숫자 포함 4-12자리)" name="password" class="form-control"/></td>
+              <th>전화번호</th>
+              <td><input type="text" placeholder="전화번호를 입력하세요. " name="phonenum" class="form-control"/></td>
             </tr>
             <tr>
-                <th>비밀번호 확인</th>
-                <td><input type="text" placeholder="비밀번호를 다시 입력하세요. " name="password2" class="form-control"/></td>
-			</tr>
+              <th>E-mail</th>
+              <td><input type="text" placeholder="이메일 주소를 입력하세요. " name="email" class="form-control"/></td>
+            </tr>
 
             <tr>
-                <th>이름</th>
-                <td><input type="text" placeholder="이름을 입력하세요. " name="name" class="form-control"/></td>
-            </tr>
-            <tr>
-                <th>주소</th>
-                <td><input type="zipcode" placeholder="ZipCode " name="zipcode" class="form-control">
-                <input type="text" placeholder="Address1 " name="ad1" class="form-control">
-                <input type="text" placeholder="Address2 " name="ad2" class="form-control"></td>
-            </tr>
-             <tr>
-                <th>전화번호</th>
-                <td><input type="text" placeholder="전화번호를 입력하세요. " name="phonenum" class="form-control"/></td>
-            </tr>
-             <tr>
-                <th>E-mail</th>
-                <td><input type="text" placeholder="이메일 주소를 입력하세요. " name="email" class="form-control"/></td>
-            </tr>
-
-	    <tr>
+              <td style="border:0px" solid=white; align="right">
                 <td style="border:0px" solid=white; align="right">
-		<td style="border:0px" solid=white; align="right">
-		<button class="btn btn-sm pull-right" id="cancel_revise" onclick="location.href='mypage.html#'">취소</button> </span>
-		<button class="btn btn-sm pull-right" onclick="location.href='my_revise.html#'" type="button">저장</button></span>
-		<button class="btn btn-sm pull-right" id="out" onclick="location.href='#'">탈퇴</button> </span>
+                  <button class="btn btn-sm pull-right" value = "1" name = "button" type="submit" id="cancel_revise">취소</button> </span>
+                  <button class="btn btn-sm pull-right" value = "2" name = "button" type="submit">저장</button></span>
+                  <button class="btn btn-sm pull-right" value = "3" name = "button" type="submit" id="out">탈퇴</button> </span>
                 </td>
-            </tr>
-    </tbody>
-</table>
-	<hr/>
+              </tr>
+            </tbody>
+          </table>
+  </form>
+    <hr/>
 	</div>
 	</div>
 

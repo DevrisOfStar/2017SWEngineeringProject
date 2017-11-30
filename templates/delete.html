@@ -17,16 +17,29 @@
 <body>
   <Header>
       <div class="logo">
-        <img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home"/>
+          <img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" />
       </div>
       <div class="search">
           <input type="text" id="searchBar" class="form-control" placeholder="Search">
           <button type="submit" id="mySearch" onclick="location.href='#'">검색</button>
       </div>
-      <div class="login">
-        <button type="button" id="Login" onclick="location.href='#'">Login</button>
-        <button type="button" id="SignUp" onclick="location.href='#'">SignUp</button>
+      {% if username %} <!-- 로그인 상태 -->
+      <div class="logout" style="float:right;padding-top:20px;">
+        <form action ="/logout/" style="float:right;display:inline;">
+          <button type="submit" id="Logout">Logout</button>
+        </form>
+        {{username}}님 환영합니다.
       </div>
+      {% else %}
+    <div class="login">
+    <form action ="/login/" style="display:inline;">
+      <button type="submit" id="Login">Login</button>
+    </form>
+    <form action ="/signup/" style="display:inline;">
+      <button type="submit" id="SignUp">SignUp</button>
+    </form>
+    </div>
+        {% endif %}
       <div class = "menu">
       <strong>
           <ul>
@@ -55,24 +68,27 @@
   <hr/>
   <p>
   <div padding:50px 1px 2px 50px;>
-  <table border = "1" align = "center" cellspacing = "0" cellpadding = "0" width = "360">
+  <form action="/delete/">
+    <table border = "1" align = "center" cellspacing = "0" cellpadding = "0" width = "360">
       <tr height = "30">
-      <td align = "center" bgcolor = "lightgray">
-            <b>비밀번호를 입력하세요.</b>
-      </td>
+        <td align = "center" bgcolor = "lightgray">
+          <b>비밀번호를 입력하세요.</b>
+        </td>
       </tr>
       <tr height = "30">
-      <td align = "center">비밀번호:
-            <input type = "password" name = "password" size = "8" maxlength = "12">
-            <input type = "hidden" name = "num" value = "">
-      </td>
+        <td align = "center">비밀번호:
+          <input type = "password" name = "password" size = "8" maxlength = "12">
+          <input type = "hidden" name = "num" value = {{number}}>
+        </td>
       </tr>
       <tr height = "30">
-      <td align = "center">
-            <input type = "submit" value = "삭제">
-      </td>
-  </tr>
-  </table>
+        <td align = "center">
+          <button type = "submit" name = "button" value = "delete"> 삭제 </button>
+          <button type = "submit" name = "button" value = "cancel"> 취소 </button>
+        </td>
+      </tr>
+    </table>
+  </form>
   <p>
   <hr/>
   <p>
