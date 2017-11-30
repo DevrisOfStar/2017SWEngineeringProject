@@ -55,18 +55,24 @@ Header {
 	height: 30px;
 	text-align: center;
 }
+#Logout {
+	float: left;
+	margin-right: 8px;
+	height: 30px;
+	text-align: center;
+}
 
 .menu {
-	position: absolute; top: 125px; left: 200px; right: 30%; 
+	position: absolute; top: 125px; left: 200px; right: 30%;
 	/* margin-left: 80px; */
-	width: 70%; min-width: 800px; 
+	width: 70%; min-width: 800px;
 	/* margin-bottom: 0px; */
 	clear:both;
 	float:left;
-	overflow:hidden;	
+	overflow:hidden;
 }
 
-.menu li { 
+.menu li {
  	display: inline; width: 120px; height: 30px; margin: 5%;
 }
 
@@ -92,7 +98,7 @@ nav {
 }
 
 section {
-	position: absolute; 
+	position: absolute;
 	left: 200px;
 	width: 100%;
 	min-width:1000px;

@@ -56,17 +56,18 @@ Header {
 	text-align: center;
 }
 
+
 .menu {
-	position: absolute; top: 125px; left: 200px; right: 30%; 
+	position: absolute; top: 125px; left: 200px; right: 30%;
 	/* margin-left: 80px; */
-	width: 70%; min-width: 800px; 
+	width: 70%; min-width: 800px;
 	/* margin-bottom: 0px; */
 	clear:both;
 	float:left;
-	overflow:hidden;	
+	overflow:hidden;
 }
 
-.menu li { 
+.menu li {
  	display: inline; width: 120px; height: 30px; margin: 5%;
 }
 
@@ -82,17 +83,46 @@ Header {
 }
 */
 
+/* nav �߰� */
 nav {
-	position: absolute;
-	list-style-type:none;
-	background-color:#339999;
-	width:200px;
-	height:600px;
-	float:left;
+   position: absolute;
+   list-style-type:none;
+   background-color:#424242;
+   width:200px;
+   height:700px;
+   float:left;
 }
 
+ .sidebar-nav {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+ .sidebar-nav li {
+    text-indent: 0.0em;
+    line-height: 4.0em;
+  }
+
+ .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999;
+  }
+
+ .sidebar-nav li a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+ .sidebar-nav > .sidebar-brand {
+    font-size: 1.3em;
+    line-height: 3em;
+  }
+ /*�߰� ���κ�*/
 section {
-	position: absolute; 
+	position: absolute;
 	left: 200px;
 	width: 100%;
 	min-width:1000px;
@@ -149,3 +179,33 @@ header, footer { line-height:10px; }
 nav, section { line-height:20px; }
 
 /* End Set Layout css */
+
+
+.pop-layer .pop-container {
+  padding: 20px 25px;
+}
+
+.pop-layer p.ctxt {
+  color: #666;
+  line-height: 25px;
+}
+
+.pop-layer .btn-r {
+  width: 100%;
+  margin: 10px 0 20px;
+  padding-top: 10px;
+  border-top: 1px solid #DDD;
+  text-align: right;
+}
+
+.pop-layer {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 410px;
+  height: auto;
+  background-color: #fff;
+  border: 5px solid #3571B5;
+  z-index: 10;
+}
