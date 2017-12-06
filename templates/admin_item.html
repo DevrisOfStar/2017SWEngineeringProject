@@ -23,7 +23,7 @@
 <body>
   <Header>
       <div class="logo">
-        <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
+            <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
       </div>
       <div class="search">
                 <form action='/search' method='POST'>
@@ -109,14 +109,16 @@
          <td>{{ row[2] }}</td>
          <td>{{ row[4] }}</td>
          <td>{{ row[3] }}</td>
-         <td><button class="btn" id="itemDetail" >수정</button></td>
-        </form>
+         <td><button class="btn" id="itemDetail" value="itemDetail" name="button" >수정</button></td>
+         <td><button class="btn" id="itemDelete" value="itemDelete" name="button" >삭제</button></td>
+         </form>
       	</tr>
 	{% endfor %}
 	</tbody>
 	</table>
 	</div>
 	</section>
+
 </body>
 
 </html>

@@ -22,7 +22,7 @@
 <body>
   <Header>
       <div class="logo">
-        <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
+          <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
       </div>
       <div class="search">
                 <form action='/search' method='POST'>
@@ -89,7 +89,7 @@
 	<div class="table-responsive">
   <form action= "/vertify/">
     <table class="table table-bordered table-condensed">
-
+{% for row in data %}
       <tbody>
         <tr>
           <th>ID</th>
@@ -106,21 +106,21 @@
 
           <tr>
             <th>이름</th>
-            <td><input type="text" placeholder="이름을 입력하세요. " name="name" class="form-control"/></td>
+            <td><input type="text" placeholder="이름을 입력하세요. " value="{{row[3]}}" name="name" class="form-control"/></td>
           </tr>
           <tr>
             <th>주소</th>
-            <td><input type="zipcode" placeholder="ZipCode " name="zipcode" class="form-control">
-              <input type="text" placeholder="Address " name="address1" class="form-control">
-              <input type="text" placeholder="detail Address " name="address2" class="form-control"></td>
+            <td><input type="zipcode" placeholder="ZipCode " name="zipcode" value="{{row[7]}}" class="form-control">
+              <input type="text" placeholder="Address " name="address1" value="{{row[4]}}" class="form-control">
+              <input type="text" placeholder="detail Address " name="address2" value="{{row[4]}}" class="form-control"></td>
             </tr>
             <tr>
               <th>전화번호</th>
-              <td><input type="text" placeholder="전화번호를 입력하세요. " name="phonenum" class="form-control"/></td>
+              <td><input type="text" placeholder="전화번호를 입력하세요. " name="phonenum" value="{{row[5]}}" class="form-control"/></td>
             </tr>
             <tr>
               <th>E-mail</th>
-              <td><input type="text" placeholder="이메일 주소를 입력하세요. " name="email" class="form-control"/></td>
+              <td><input type="text" placeholder="이메일 주소를 입력하세요. " name="email" value="{{row[6]}}" class="form-control"/></td>
             </tr>
 
             <tr>
@@ -132,13 +132,19 @@
                 </td>
               </tr>
             </tbody>
+            {% endfor %}
           </table>
   </form>
     <hr/>
 	</div>
-</div>
+	</div>
+
+
 
 	</section>
+
+
+
 </body>
 
 </html>

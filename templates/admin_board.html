@@ -17,7 +17,7 @@
 <body>
   <Header>
       <div class="logo">
-        <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
+            <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
       </div>
       <div class="search">
                 <form action='/search' method='POST'>
@@ -84,10 +84,12 @@
 	<thead>
 	<tr class="text-center">
 		<th width="80">번호</th>
-		<th width="300">제목</th>
+		<th width="200">제목</th>
+		<th width="300">내용</th>
 		<th width="80">작성자</th>
 		<th width="80">날짜</th>
 		<th width="80">조회수</th>
+		<th width="80">삭제</th>
     <th></th>
 	</thead>
 	<tbody>
@@ -96,10 +98,11 @@
             <form action="{{url_for('modifyadminboard')}}">
            <td><input type="hidden" name="number" value="{{row[0]}}"/>{{ row[0]}}</td>
            <td>{{ row[1] }}</td>
+           <td>{{ row[2] }}</td>
            <td>{{ row[3] }}</td>
            <td>{{ row[4] }}</td>
            <td>{{ row[5] }}</td>
-           <td><button class="btn" id="itemDetail">수정</button></td>
+           <td><button class="btn" id="itemDetail">삭제</button></td>
          </form>
         	</tr>
   	{% endfor %}
@@ -109,6 +112,7 @@
 	</div>
 
   </section>
+
 </body>
 
 </html>

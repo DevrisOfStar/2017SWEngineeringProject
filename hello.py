@@ -35,6 +35,7 @@ def home(username = None) : # get userName in index
     data = cursor.fetchall()
     cursor.execute("SELECT * FROM item_table LIMIT 6 ")
     item = cursor.fetchall()
+
     if 'username' in session :
         username = session['username']
     else :
@@ -158,12 +159,12 @@ def bestproduct():
     if 'username' in session :
         username = session['username']
     else :
-        username = None
+        return render_template('login.html')
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.execute("Select * from item_table limit 6")
     data = cursor.fetchall()
-    return render_template('search_result.html', username = username, data=data)
+    return render_template('search_result.html', username = username, data = data)
 
 # 카테고리별 데이터 보여주기
 @app.route('/search/category/<number>',methods=['GET','POST']) # 완료
@@ -175,15 +176,25 @@ def category(number = None) :
     if data is None :
         return "<script>alert('검색결과가 없습니다.'); history.back();</script>"
     else :
-        return render_template('search_result.html', data=data)
+        return render_template('search_result.html', data = data)
 
 # 상품 검색 결과 선택 부분
 @app.route('/item_select/', methods=['Get','POST']) # 완료
 def item_select() :
     button = request.values.get("button")
     number = request.values.get("number")
-    if button == "order" :
-        return order(number = number)
+
+    if 'username' in session :
+        username = session['username']
+    else :
+        username = None
+    if button == "order" : # 장바구니 추가
+        cost = request.values.get("cost")
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute("insert into cart_table values (%s, %s, 1, %s)",(username,number,cost))
+        conn.commit()
+        return "<script>alert('장바구니에 추가하였습니다.'); history.back();</script>"
     elif button == "detail" :
         return item_detail(number = number)
 
@@ -199,12 +210,64 @@ def item_detail(number = None) :
         data = cursor.fetchall()
         return render_template('item_detail.html',data = data)
 
-def order() : # 장바구니 추가 부분 - 구현해야됨
-    return 1
+@app.route('/item_order/', methods=['GET','POST']) # 완료
+def order() : # 주문 - 결제 부분
+    button = request.values.get('button')
+    amount = request.values.get('amount') # 총계
+    counts = request.values.get('counts') # 주문 개수
+    item = request.values.get('item')
+    if button == "card" :
+        return render_template('payment_card.html',amount=amount)
+    if button == "bank" :
+        return render_template('payment_bank.html',amount=amount)
+    if button == "insert" :
+        if 'username' in session :
+            username = session['username']
+        else :
+            return render_template('login.html')
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute("update cart_table set amount = %s where item_id=%s and mem_id = %s",(counts,item,username))
+        conn.commit()
+        return "<script>alert('물품을 수정하였습니다.'); history.back();</script>"
+    if button == "delete" :
+        if 'username' in session :
+            username = session['username']
+        else :
+            return render_template('login.html')
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute("delete from cart_table where item_id = %s and mem_id = %s",(item,username))
+        conn.commit()
+        return "<script>alert('물품을 삭제하였습니다.'); history.back();</script>"
+    if button == "cancel" :
+        return render_template('search_result.html')
+    if button == "order" :
+        return  "<script>alert('취소를 누르고, 장바구니담기 버튼을 눌러주세요.'); history.back();</script>"
 
-def payment() : # 결제 부분 - 구현해야됨
-    return 1
 
+@app.route('/payment_card/', methods=['GET','POST']) # 구현 부족
+def paymentcard() : # 결제 부분 - 카드결제 or 무통장입금
+    cardnum_1 = request.values.get('cardnum_1')
+    cardnum_2 = request.values.get('cardnum_2')
+    cardnum_3 = request.values.get('cardnum_3')
+    cardnum_4 = request.values.get('cardnum_4')
+    cardcvc = request.values.get('cardcvc')
+    cardmonth = request.values.get('cardmonth')
+
+    if not (cardnum_1 and cardnum_2 and cardnum_3 and cardnum_4 and cardcvc and cardmonth) :
+        return "<script>alert('빈공간이 존재합니다.'); history.back();</script>"
+    else :
+        return render_template('index.html')
+
+@app.route('/payment_bank/',methods=['GET','POST']) # 구현 부족
+def paymentbank() :
+    name = request.values.get('name')
+
+    if not (name) :
+        return "<script>alert('빈공간이 존재합니다.'); history.back();</script>"
+    else :
+        return : "<script>alert('계좌번호 : 123-456-7890 (국민)으로 입금부탁드립니다.'); history.back();</script>"
 # community 부분
 @app.route('/community/',methods=['GET','POST']) # 완료
 def community():
@@ -292,10 +355,10 @@ def read_btn() :
         conn = mysql.connect()
         cursor = conn.cursor()
         cursor.execute("select * from board_table where bd_num = %s and writer_id = %s",(number,username))
-        data = cursor.fetchone()
+        data = cursor.fetchall()
         if data is None :
             return "<script>alert('수정권한이 없습니다.'); history.back();</script>"
-        return render_template('modify.html',username = username, number = number)
+        return render_template('modify.html',username = username, number = number, data = data)
 
     elif button == "delete" :
         return render_template('delete.html',username = username, number = number)
@@ -305,6 +368,7 @@ def read_btn() :
 # community - modify : 게시글 수정
 @app.route('/community/modify/db/',methods=['GET','POST']) # 완료
 def modifyDB() :
+
     button = request.values.get('button')
 
     if button == 'list' :
@@ -312,6 +376,7 @@ def modifyDB() :
     elif button == 'cancel' :
         return redirect(url_for('community'))
     elif button =='modify' :
+
         UserID = session['username']
         number = request.values.get('number')
         subject = request.values.get('subject')
@@ -409,11 +474,24 @@ def adminitem():
 def modifyItem() :
     if 'username' in session :
         username = session['username']
-        number = request.values.get('number')
-        cursor = mysql.connect().cursor()
-        cursor.execute("Select * from item_table where item_id = %s", number)
-        data = cursor.fetchall()
-        return render_template('admin_item_detail.html',username = username, data=data)
+        button = request.values.get('button')
+        if button == 'itemDelete' :
+            number = request.values.get('number')
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            cursor.execute("delete from item_table where item_id = %s", number)
+            conn.commit()
+            return redirect('admin_item')
+
+
+        elif button == 'itemDetail':
+            number = request.values.get('number')
+            cursor = mysql.connect().cursor()
+            cursor.execute("Select * from item_table where item_id = %s", number)
+            data = cursor.fetchall()
+            return render_template('admin_item_detail.html',username = username, data=data)
+        else:
+            return render_template('admin_item.html',username = username)
 
 # admin item - 등록창으로 이동
 @app.route('/admin_item/register/',methods=['GET','POST']) # 완료
@@ -461,7 +539,7 @@ def InsertItem() :
 def updateItem() :
     button = request.values.get('button')
     if button == 'cancel' :
-        return redirect('adminitem')
+        return redirect('/admin_item/')
     # button  == 'save'
 
     ID = request.values.get('prodID')
@@ -481,7 +559,7 @@ def updateItem() :
      item_price = %s, item_info = %s, stock = %s where item_id = %s"""
      ,(Name, Price, Detail, Counts, ID))
     conn.commit()
-    return "<script>alert('수정이 완료되었습니다.'); history.back();</script>"
+    return redirect('admin_item')
 
 # member admin data db에서 가져와 페이지에 로드
 @app.route('/admin_member/', methods=['GET','POST']) # 완료
@@ -547,10 +625,11 @@ def modifyadminboard() :
     if 'username' in session :
         username = session['username']
         number = request.values.get('number')
-        cursor = mysql.connect().cursor()
-        cursor.execute("Select * from board_table where bd_num=%s",number)
-        data = cursor.fetchall()
-        return render_template('admin_board_detail.html',username = username, data = data, number = number)
+        conn=mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute("delete from board_table where bd_num=%s",number)
+        conn.commit()
+        return redirect('admin_board')
     else:
         return """
         <script>alert('로그인이 필요합니다.'); history.back();</script>
@@ -587,13 +666,24 @@ def processadminboard() :
 def mypage() :
     if 'username' in session :
         username = session['username']
-        return render_template('mypage.html',username = username)
+        amount = 0
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute("select * from cart_table, item_table where cart_table.item_id = item_table.item_id and cart_table.mem_id = %s",username)
+        data = cursor.fetchall()
+        data2 = data
+        if data2 is not None :
+            for row in data2 :
+                amount = amount + row[2] * row[3]
+
+        return render_template('mypage.html',username = username, data = data, amount = amount)
     else:
         return """
         <script>alert('로그인이 필요합니다.'); history.back();</script>
         """
 
-@app.route('/my_order/',methods=['GET','POST']) # 주문번호별 리스트 보여주기 - 구현중
+# 주문번호별 리스트 보여주기
+@app.route('/my_order/',methods=['GET','POST'])
 @app.route('/my_order/<username>',methods=['GET','POST'])
 def myorder(username = None) :
     if 'username' in session :
@@ -601,28 +691,21 @@ def myorder(username = None) :
         cursor = mysql.connect().cursor()
         cursor.execute("Select * from orderlist_table where order_name = %s",(username))
         data = cursor.fetchall()
-        return render_template('my_order.html',username = username,data = data)
+        return render_template('my_order.html',username = username, data = data)
     else:
         return """
         <script>alert('로그인이 필요합니다.'); history.back();</script>
         """
-
-# id 값으로 아이템이름 찾기.
-def findItem(itemid) : # 구현했으나 미작동
-    if itemid == None :
-        return None
-    else :
-        cursor = mysql.connect().cursor()
-        cursor.execute("select * from item_table where item_id = %s",itemid)
-        data = cursor.fetchall()
-        return data[0]
 
 @app.route('/my_revise/',methods=['GET','POST']) # 완료
 @app.route('/my_revise/<username>',methods=['GET','POST'])
 def myrevise(username = None) :
     if 'username' in session :
         username = session['username']
-        return render_template('my_revise.html',username = username)
+        cursor = mysql.connect().cursor()
+        cursor.execute("select * from member where mem_id = %s",username)
+        data = cursor.fetchall()
+        return render_template('my_revise.html',username = username, data=data)
     else:
         return """
         <script>alert('로그인이 필요합니다.'); history.back();</script>
@@ -671,7 +754,7 @@ def vertify() : # 1 : cancel, 2 : save, 3 : drop
         cursor = conn.cursor()
         cursor.execute("delete from member where mem_id = %s",(username))
         conn.commit()
-        return "<script>alert('data 삭제.'); history.back() </script> "
+        return "<script>alert('탈퇴가 완료되었습니다.'); history.back() </script> "
     else :
         return errorhandler(404)
 

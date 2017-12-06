@@ -91,7 +91,7 @@
     		<tr>
                 <th>상품 이미지</th>
 		<td align="left">
-    	<!--	<img src="/static/img/{{row[0]}}.jpg" height="120px" width="120px" />-->
+    	<img src="/static/img/{{row[0]}}.jpg" height="120px" width="120px" />
 		</td>
 			<tr>
 			 <th>상품번호 </th>
@@ -138,10 +138,13 @@
 
 	    <tr>
                 <td style="border:0px" solid=white; align="right"> <!-- 여기 부분 구현 -->
-		<td style="border:0px" solid=white; align="right"><button class="btn btn-sm pull-right" onclick="location.href='admin_item.html#'" type="button">구매</button></span>
-		 	<button class="btn btn-sm pull-right" id="writer" onclick="location.href='admin_item.html#'">취소</button> </span>
+    <form action="{{url_for('order')}}">
+
+		<td style="border:0px" solid=white; align="right"><button class="btn btn-sm pull-right" type="submit" name= "button" value ="order">구매</button></span>
+		 	<button class="btn btn-sm pull-right" id="writer" type="submit" name="button" value ="cancel">취소</button></span>
                 </td>
             </tr>
+          </form>
     </tbody>
     {% endfor %}
 </table>

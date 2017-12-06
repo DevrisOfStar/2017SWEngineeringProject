@@ -18,7 +18,7 @@
   <Header>
       <div class="logo">
 
-        <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
+            <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
         </form>
       </div>
       <div class="search">
@@ -93,7 +93,7 @@
             </tr>
             <tr>
                 <th >내용: </th>
-                <td><textarea cols="50" rows="10" placeholder="내용을 입력하세요. " name="content" value ="{{row[2]}}" class="form-control"></textarea></td>
+                <td><textarea cols="50" rows="10" placeholder="{{row[2]}}" name="content" value ="{{row[2]}}" class="form-control"></textarea></td>
             </tr>
 	    <tr>
           <td style="border:0px" solid=white; align="right">
@@ -111,6 +111,9 @@
 </div>
 </div>
   </section>
+
+
+
 </body>
 
 </html>

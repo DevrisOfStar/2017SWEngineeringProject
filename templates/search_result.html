@@ -104,8 +104,9 @@
          <td>{{ row[2] }}</td>
          <td>{{ row[3] }}</td>
          <td>
-             <input type="hidden" name="number" value={{row[0]}}/>
-             <button type="submit" name ="button" value="order"> 주문 </button>
+             <input type="hidden" name="number" value={{row[0]}}>
+             <input type="hidden" name="cost" value={{row[2]}}>
+             <button type="submit" name ="button" value="order"> 장바구니추가 </button>
              <button type="submit" name ="button" value="detail"> 상품상세정보 </button>
         </td>
         </form>
@@ -118,11 +119,7 @@
 
 
 </section>
-<div class="cart">
-  <center>
-    cart
-  </center>
-</div>
+
 </body>
 
 </html>
