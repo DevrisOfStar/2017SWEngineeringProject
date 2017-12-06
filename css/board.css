@@ -1,0 +1,157 @@
+/*Set Layout css*/
+
+Header {
+	background-color:lightgrey;
+	height:150px;
+	width: 100%;
+}
+
+.logo {
+	float:left;
+	padding : 15px;
+	margin-left: 25px;
+}
+
+.search {
+	display: inline-flex;
+	position: absolute; left: 350px; right: 35%; top: 35px;
+	width: 60%; min-width: 200px; overflow: hidden;
+	height: 60px;
+	padding: 20px;
+	float: left;
+	align : center;
+}
+
+#searchBar {
+	float: left;
+	vertical-align: middle;
+	width : 80%; min-width: 200px;max-width: 700px;
+	height : 30px;
+	overflow: hidden;
+}
+
+#mySearch {
+	float: left; overflow: hidden;
+	margin: 10px; margin-top: 0px;
+	height: 30px;
+	text-align: center;
+}
+
+.login {
+	float:right;
+	padding-top:20px;
+}
+
+#Login {
+	float: left;
+	margin-right: 8px;
+	height: 30px;
+	text-align: center;
+}
+
+#SignUp {
+	float: left;
+	margin-right: 8px;
+	height: 30px;
+	text-align: center;
+}
+#Logout {
+	float: left;
+	margin-right: 8px;
+	height: 30px;
+	text-align: center;
+}
+
+.menu {
+	position: absolute; top: 125px; left: 200px; right: 30%;
+	/* margin-left: 80px; */
+	width: 70%; min-width: 800px;
+	/* margin-bottom: 0px; */
+	clear:both;
+	float:left;
+	overflow:hidden;
+}
+
+.menu li {
+ 	display: inline; width: 120px; height: 30px; margin: 5%;
+}
+
+.menu li a {
+	color: #333; text-decoration: none;
+ 	/*padding: 20px;*/
+ 	text-align: center; vertical-align: middle;
+}
+/*
+.menu li + li {
+ 	margin-left: 35px;
+ 	border-left: 2px solid #333;
+}
+*/
+
+nav {
+	position: absolute;
+	list-style-type:none;
+	background-color:#339999;
+	width:200px;
+	height:700px;
+	float:left;
+}
+
+section {
+	position: absolute;
+	left: 200px;
+	width: 100%;
+	min-width:1000px;
+	height: 600px;
+	text-align:center;
+	float:center;
+}
+/*
+section:after{content:"";display:block;clear:both;}*/
+
+
+.list {
+	width: calc( 100% - 500px);
+	min-width: 800px;
+	float: center;
+}
+
+.writer {
+	position: absolute; top: 20px;
+	width: calc( 100% - 500px);
+	min-width: 800px;
+	height: 700px;
+	float: center;
+}
+.read {
+	position: absolute; top: 20px;
+	width: calc( 110% - 500px);
+	min-width: 800px;
+	height: 700px;
+	float: center;
+}
+
+
+.cart {
+	background-color: rgba(0, 51, 153, 0.7);
+	position: fixed;
+	right: 10px;
+	width: 200px;
+	height: 500px;
+	float:left;
+}
+
+footer {
+	position: absolute; top: 810px;
+	background-color:#FFCC00;
+	height:100px; width: 100%;
+	clear:both;
+}
+
+
+header, nav, section { text-align:center; }
+nav, footer { padding: 20px; }
+header, footer { line-height:10px; }
+nav, section { line-height:20px; }
+
+/* End Set Layout css */

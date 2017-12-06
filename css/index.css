@@ -1,0 +1,205 @@
+/*Set Layout css*/
+
+Header {
+	background-color:lightgrey;
+	height:150px;
+	width: 100%;
+
+}
+
+.logo {
+	float:left;
+	padding : 15px;
+	margin-left: 25px;
+}
+
+.search {
+	display: inline-flex;
+	position: absolute; left: 350px; right: 35%; top: 35px;
+	width: 60%; min-width: 200px; overflow: hidden;
+	height: 60px;
+	padding: 20px;
+	float: left;
+	align : center;
+}
+
+#searchBar {
+	float: left;
+	vertical-align: middle;
+	width : 80%; min-width: 200px;max-width: 700px;
+	height : 30px;
+	overflow: hidden;
+}
+
+#mySearch {
+	float: left; overflow: hidden;
+	margin: 10px; margin-top: 0px;
+	height: 30px;
+	text-align: center;
+}
+
+.login {
+	float:right;
+	padding-top:20px;
+}
+
+#Login {
+	float: left;
+	margin-right: 8px;
+	height: 30px;
+	text-align: center;
+}
+
+#SignUp {
+	float: left;
+	margin-right: 8px;
+	height: 30px;
+	text-align: center;
+}
+
+
+.menu {
+	position: absolute; top: 125px; left: 200px; right: 30%;
+	/* margin-left: 80px; */
+	width: 70%; min-width: 800px;
+	/* margin-bottom: 0px; */
+	clear:both;
+	float:left;
+	overflow:hidden;
+}
+
+.menu li {
+ 	display: inline; width: 120px; height: 30px; margin: 5%;
+}
+
+.menu li a {
+	color: #333; text-decoration: none;
+ 	/*padding: 20px;*/
+ 	text-align: center; vertical-align: middle;
+}
+/*
+.menu li + li {
+ 	margin-left: 35px;
+ 	border-left: 2px solid #333;
+}
+*/
+
+/* nav �߰� */
+nav {
+   position: absolute;
+   list-style-type:none;
+   background-color:#424242;
+   width:200px;
+   height:700px;
+   float:left;
+}
+
+ .sidebar-nav {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+ .sidebar-nav li {
+    text-indent: 0.0em;
+    line-height: 4.0em;
+  }
+
+ .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999;
+  }
+
+ .sidebar-nav li a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+ .sidebar-nav > .sidebar-brand {
+    font-size: 1.3em;
+    line-height: 3em;
+  }
+ /*�߰� ���κ�*/
+section {
+	position: absolute;
+	left: 200px;
+	width: 100%;
+	min-width:1000px;
+	height: 600px;
+	text-align:left;
+	float:left;
+}
+/*
+section:after{content:"";display:block;clear:both;}*/
+
+.bestproduct {
+	border: 3px dashed lightblue;
+	width: calc( 50% - 200px);
+	min-width: 400px;
+	height: 400px;
+	float: left;
+}
+
+.community {
+	border: 3px dashed lightpink;
+	width: calc( 50% - 200px);
+	min-width: 400px;
+	height: 400px;
+	float: left;
+}
+
+.cart {
+	background-color: rgba(0, 51, 153, 0.7);
+	position: fixed;
+	right: 10px;
+	width: 200px;
+	height: 500px;
+	float:left;
+}
+
+header, nav, section { text-align:center; }
+nav { padding: 20px; }
+header { line-height:10px; }
+nav, section { line-height:20px; }
+
+/* End Set Layout css */
+
+
+.pop-layer .pop-container {
+  padding: 20px 25px;
+}
+
+.pop-layer p.ctxt {
+  color: #666;
+  line-height: 25px;
+}
+
+.pop-layer .btn-r {
+  width: 100%;
+  margin: 10px 0 20px;
+  padding-top: 10px;
+  border-top: 1px solid #DDD;
+  text-align: right;
+}
+
+.pop-layer {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 410px;
+  height: auto;
+  background-color: #fff;
+  border: 5px solid #3571B5;
+  z-index: 10;
+}
+
+.ad {
+   overflow: hidden;
+   width: calc( 100% - 400px);
+   height: 190px;
+   float: left;
+   padding: 10px;
+}
