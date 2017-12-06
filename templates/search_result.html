@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang = "ko">
 <Head>
 <title>About My Dog</title>
@@ -11,159 +11,118 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/board.css') }}">
 </strong>
 
-</Head>
+ </Head>
 
 <body>
   <Header>
-      <div class="logo">
-        <img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" />
+    <div class="logo">
+                 <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
       </div>
-      <div class="search">
-          <input type="text" id="searchBar" class="form-control" placeholder="Search">
-          <button type="submit" id="mySearch" onclick="location.href='#'">검색</button>
-      </div>
-
-      {% if username %} <!-- 로그인 상태 -->
-      <div class="logout" style="float:right;padding-top:20px;">
-        {{username}}님 환영합니다.
-          <form action ="/logout/" style="display:inline;">
-            <button type="submit" id="Logout">Logout</button>
+	<div class="search">
+          <form action='/search' method='POST'>
+		<span class="input-group-btn pull-right">
+                <input type="text" name="searchBar" class="form-control" placeholder="Search" size="90" >
+		<button class="btn btn-danger" type="submit" id="mySearch" onclick="location.href='#'"  style="height:40px; width:60px;">검색</button>
+		</span>
           </form>
-      </div>
-      {% else %}
-      <div class="login">
-    <form action ="/login/" style="display:inline;">
-      <button type="submit" id="Login">Login</button>
-    </form>
-    <form action ="/signup/" style="display:inline;">
-      <button type="submit" id="SignUp">SignUp</button>
-    </form>
-    </div>
-        {% endif %}
+          </div>
 
-      <div class = "menu">
-      <strong>
-          <ul>
-            <li><a href="#">베스트상품</a></li>
-            <li><a href="#">애완용품</a></li>
-            <li><a href="{{url_for('community')}}">COMMUNITY</a></li>
-            <li><a href="{{url_for('mypage')}}">MY PAGE</a></li>
-          </ul>
-        </strong>
-   </div>
+          {% if username%} <!-- 로그인 상태 -->
+         <div class="logout" style="float:right;padding-top:20px;">
+           <form action ="/logout/" style="float:right;display:inline;">
+             <button type="submit" id="Logout">Logout</button>
+           </form>
+           {{username}} 님 환영합니다.
+         </div>
+         {% else %}
+         <div class="login">
+        <form action ="/login/" style="display:inline;">
+         <button type="submit" id="Login">Login</button>
+        </form>
+        <form action ="/signup/" style="display:inline;">
+         <button type="submit" id="SignUp">SignUp</button>
+        </form>
+        </div>
+           {% endif %}
+         <div class = "menu">
+         <strong>
+             <ul>
+               <li><a href="{{url_for('bestproduct')}}">베스트상품</a></li>
+               <li><a href="{{url_for('search')}}">애완용품</a></li>
+               <li><a href="{{url_for('community')}}">COMMUNITY</a></li>
+              {% if username == "admin" %}
+               <li><a href="{{url_for('admin')}}">ADMIN PAGE</a></li>
+               {% else %}
+               <li><a href="{{url_for('mypage')}}">MY PAGE</a></li>
+               {% endif %}
+             </ul>
+           </strong>
+        </div>
+  </header>
 
-  </Header>
+  <nav id="page-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <font color="white">Category</font>
+      </li>
 
-  <nav>
 
-  Side Menu
-  <!--
-	<ul>
-	    <li><a href="#">Product</a></li>
+          <li><a href="{{url_for('category',number='1')}}">옷</a></li>
+          <li><a href="{{url_for('category',number='2')}}">사료</a></li>
+          <li><a href="{{url_for('category',number='3')}}">간식</a></li>
+          <li><a href="{{url_for('category',number='4')}}">장난감</a></li>
+          <li><a href="{{url_for('category',number='5')}}">목욕용품</a></li>
+
     </ul>
-	-->
   </nav>
 
 
 
 <section>
-
 <div class="list"  >
 	<p>
 	<h5 align="left">▶ 상품 검색 결과 </h5>
 	<p align="left">
 	<hr/>
-	<div class="container"></div> <!--container-fluid-->
-	<table class="table table-condensed" style="table-layout:fixed">
+	<div class="container"></div> <!—container-fluid—>
+	<table class="table table-striped table-hover" style="table-layout:fixed">
+	<thead>
+	<tr class="text-center">
+		<th>상품이미지 </th>
+		<th>상품</th>
+		<th>가격 </th>
+		<th>세부정보</th></tr>
+	</thead>
 	<tbody>
 	<div>
+
 	{% for row in data %}
       	<tr>
-         <td>{{ row[0] }}</td>
-         <td>{{ row[1] }}</td>
+          <form style="display:inline-block;" action="/item_select/">
+         <td><img src="/static/img/{{row[0]}}.jpg" height="120px" width="120px" /></td>
+         <td><a href="{{url_for('item_detail',number = row[0])}}">{{ row[1] }}</a></td>
+         <td>{{ row[2] }}</td>
+         <td>{{ row[3] }}</td>
+         <td>
+             <input type="hidden" name="number" value={{row[0]}}/>
+             <button type="submit" name ="button" value="order"> 주문 </button>
+             <button type="submit" name ="button" value="detail"> 상품상세정보 </button>
+        </td>
+        </form>
       	</tr>
 	{% endfor %}
-	</div>
 
-	<!--
-	 <tr>
-	 <td> <a href="item1_detail.html"><img src="./logo.png" height="150px" width="150px" title="10001"/></a></td>
-	 <td> <a href="item1_detail.html"><img src="./logo.png" height="150px" width="150px" title="10002"/></a></td>
-	 <td> <a href="item1_detail.html"><img src="./logo.png" height="150px" width="150px" title="10003"/></a></td>
-	 <td> <a href="item1_detail.html"><img src="./logo.png" height="150px" width="150px" title="10004"/></a></td>
-	 <td> <a href="item1_detail.html"><img src="./logo.png" height="150px" width="150px" title="10005"/></a></td>
-	 </tr>
-	 <tr>
-	 <td> <a href="item1_detail.html#" alt="">item#10001</a></td>
-	 <td> <a href="item1_detail.html#" alt="">item#10002</a></td>
-	 <td> <a href="item1_detail.html#" alt="">item#10003</a></td>
-	 <td> <a href="item1_detail.html#" alt="">item#10004</a></td>
-	 <td> <a href="item1_detail.html#" alt="">item#10005</a></td>
-	 </tr>
-	 <tr>
-	 <td> <a href="item1_detail.html"><img src="./logo.png" height="150px" width="150px" title="20001"/></a></td>
-	 <td> <a href="item1_detail.html"><img src="./logo.png" height="150px" width="150px" title="20002"/></a></td>
-	 <td> <a href="item1_detail.html"><img src="./logo.png" height="150px" width="150px" title="20003"/></a></td>
-	 <td> <a href="item1_detail.html"><img src="./logo.png" height="150px" width="150px" title="20004"/></a></td>
-	 <td> <a href="item1_detail.html"><img src="./logo.png" height="150px" width="150px" title="20005"/></a></td>
-	 </tr>
-	 <tr>
-	 <td> <a href="item1_detail.html#" alt="">item#20001</a></td>
-	 <td> <a href="item1_detail.html#" alt="">item#20002</a></td>
-	 <td> <a href="item1_detail.html#" alt="">item#20003</a></td>
-	 <td> <a href="item1_detail.html#" alt="">item#20004</a></td>
-	 <td> <a href="item1_detail.html#" alt="">item#20005</a></td>
-	 </tr>
-	 —>
+	</div>
 	</tbody>
 	</table>
-	<hr/>
-	</div>
-	</div>
 
 
-
-
-
-<!--
-
-	<h5>▶ 상품 검색 결과</h5>
-	 <div class="product">
-
-	 <ul>
-	 <li><a href="item1_detail.html"><img src="./logo.png" height="150px" width="150px" title="10001"/></a><a href="item1_detail.html#" alt="">item#10001</a></li>
-	 <li><a href="#" alt="">10002</a></li>
-  	 <li><a href="#" alt="">10003</a></li>
-  	 <li><a href="#" alt="">10004</a></li>
-  	 <li><a href="#" alt="">10005</a></li>
-	 <li><a href="#" alt="">10006</a></li>
-	 <li><a href="#" alt="">10007</a></li>
-  	 <li><a href="#" alt="">10008</a></li>
-  	 <li><a href="#" alt="">10009</a></li>
-  	 <li><a href="#" alt="">10010</a></li>
-	</ul>
-	</div>
-
-
-
-
-	  <ul class="pagination" align="center">
-	    <li><a href="#"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
-	    <li><a href="#">1</a></li>
-	    <li><a href="#">2</a></li>
-	    <li><a href="#">3</a></li>
-	    <li><a href="#">4</a></li>
-	    <li><a href="#">5</a></li>
-	    <li><a href="#"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
-	  </ul>
-
--->
 </section>
-
-
-  <footer>
-      About My Dog
-  </footer>
+<div class="cart">
+  <center>
+    cart
+  </center>
+</div>
 </body>
 
 </html>

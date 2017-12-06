@@ -24,49 +24,49 @@
 <body>
        <Header>
            <div class="logo">
-             <img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" />
+             <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
            </div>
            <div class="search">
-               <input type="text" id="searchBar" class="form-control" placeholder="Search">
-               <button type="submit" id="mySearch" onclick="location.href='#'">검색</button>
-           </div>
-           {% if username %} <!-- 로그인 상태 -->
-           <div class="logout" style="float:right;padding-top:20px;">
-             <form action ="/logout/" style="float:right;display:inline;">
-               <button type="submit" id="Logout">Logout</button>
-             </form>
-             {{username}}님 환영합니다.
-           </div>
-           {% else %}
-           <div class="login">
-         <form action ="/login/" style="display:inline;">
-           <button type="submit" id="Login">Login</button>
-         </form>
-         <form action ="/signup/" style="display:inline;">
-           <button type="submit" id="SignUp">SignUp</button>
-         </form>
-         </div>
-             {% endif %}
-           <div class = "menu">
-           <strong>
-               <ul>
-                 <li><a href="#">베스트상품</a></li>
-                 <li><a href="#">애완용품</a></li>
-                 <li><a href="{{url_for('community')}}">COMMUNITY</a></li>
-                 <li><a href="{{url_for('mypage')}}">MY PAGE</a></li>
-               </ul>
-             </strong>
-        </div>
-
-       </Header>
-
-
+                     <form action='/search' method='POST'>
+                 <span class="input-group-btn pull-right">
+                           <input type="text" name="searchBar" class="form-control" placeholder="Search" size="90" >
+                 <button class="btn btn-danger" type="submit" id="mySearch" onclick="location.href='#'"  style="height:40px; width:60px;">검색</button>
+                 </span>
+                     </form>
+                      </div>
+                      {% if username%} <!-- 로그인 상태 -->
+                     <div class="logout" style="float:right;padding-top:20px;">
+                       <form action ="/logout/" style="float:right;display:inline;">
+                         <button type="submit" id="Logout">Logout</button>
+                       </form>
+                       {{username}} 님 환영합니다.
+                     </div>
+                     {% else %}
+                     <div class="login">
+                   <form action ="/login/" style="display:inline;">
+                     <button type="submit" id="Login">Login</button>
+                   </form>
+                   <form action ="/signup/" style="display:inline;">
+                     <button type="submit" id="SignUp">SignUp</button>
+                   </form>
+                   </div>
+                       {% endif %}
+                     <div class = "menu">
+                     <strong>
+                         <ul>
+                           <li><a href="{{url_for('bestproduct')}}">베스트상품</a></li>
+                           <li><a href="{{url_for('search')}}">애완용품</a></li>
+                           <li><a href="{{url_for('community')}}">COMMUNITY</a></li>
+                          {% if username == "admin" %}
+                           <li><a href="{{url_for('admin')}}">ADMIN PAGE</a></li>
+                           {% else %}
+                           <li><a href="{{url_for('mypage')}}">MY PAGE</a></li>
+                           {% endif %}
+                         </ul>
+                       </strong>
+                  </div>
+                </header>
     {% block content%}
     {% endblock %}
-
-    <footer>
-        About My Dog
-    </footer>
-
   </body>
 </html>

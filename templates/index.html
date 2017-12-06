@@ -23,19 +23,23 @@
 
 <body>
        <Header>
-           <div class="logo">
-             <img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" />
+         <div class="logo">
+                  <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
            </div>
            <div class="search">
-               <input type="text" id="searchBar" class="form-control" placeholder="Search">
-               <button type="submit" id="mySearch" onclick="location.href='#'">검색</button>
-           </div>
-           {% if username %} <!-- 로그인 상태 -->
+                     <form action='/search' method='POST'>
+                 <span class="input-group-btn pull-right">
+                           <input type="text" name="searchBar" class="form-control" placeholder="Search" size="90" >
+                 <button class="btn btn-danger" type="submit" id="mySearch" onclick="location.href='#'"  style="height:40px; width:60px;">검색</button>
+                 </span>
+                     </form>
+                      </div>
+            {% if username%} <!-- 로그인 상태 -->
            <div class="logout" style="float:right;padding-top:20px;">
              <form action ="/logout/" style="float:right;display:inline;">
                <button type="submit" id="Logout">Logout</button>
              </form>
-             {{username}}님 환영합니다.
+             {{username}} 님 환영합니다.
            </div>
            {% else %}
            <div class="login">
@@ -50,68 +54,103 @@
            <div class = "menu">
            <strong>
                <ul>
-                 <li><a href="#">베스트상품</a></li>
-                 <li><a href="#">애완용품</a></li>
+                 <li><a href="{{url_for('bestproduct')}}">베스트상품</a></li>
+                 <li><a href="{{url_for('search')}}">애완용품</a></li>
                  <li><a href="{{url_for('community')}}">COMMUNITY</a></li>
+                {% if username == "admin" %}
+                 <li><a href="{{url_for('admin')}}">ADMIN PAGE</a></li>
+                 {% else %}
                  <li><a href="{{url_for('mypage')}}">MY PAGE</a></li>
+                 {% endif %}
                </ul>
              </strong>
         </div>
 
        </Header>
 
-  <nav>
+       <nav id="page-wrapper">
+         <ul class="sidebar-nav">
+           <li class="sidebar-brand">
+             <font color="white">Category</font>
+           </li>
+               <li><a href="{{url_for('category',number='1')}}">옷</a></li>
+               <li><a href="{{url_for('category',number='2')}}">사료</a></li>
+               <li><a href="{{url_for('category',number='3')}}">간식</a></li>
+               <li><a href="{{url_for('category',number='4')}}">장난감</a></li>
+               <li><a href="{{url_for('category',number='5')}}">목욕용품</a></li>
 
-  Side Menu
-  <!--
-	<ul>
-	    <li><a href="#">Product</a></li>
-    </ul>
-	-->
-  </nav>
+         </ul>
+       </nav>
+
 
   <section>
-	<div class="ad">
-	ad
-	<!--	<img src="" height="100%" title="Ad" /> -->
+    <div class="ad">
+        <img src="{{url_for('static',filename='img/ad2.jpg')}}" height="170px" style="float:left;" title="Ad" />
+     </div>
+
+	<div class="bestproduct"> <H4>▶ BEST PRODUCT</H4>
+	<p>
+	<p>
+	<table class="table table-condensed" style="table-layout:fixed">
+	<tbody>
+	<div>
+      	<tr>
+         <td><img src="/static/img/10014.jpg" height="120px" width="150px" /></td>
+         <td><img src="/static/img/10017.jpg" height="120px" width="150px" /></td>
+         <td><img src="/static/img/10018.jpg" height="120px" width="150px" /></td>
+      	</tr>
+	<tr>
+         <th>메이비원피스 핑크</th>
+         <th>팝원피스 네이비</th>
+         <th>피카딜리티셔츠 그린</th>
+	</tr>
 	</div>
-	<div class="bestproduct">
-		<dl>bestproduct</dl>
-		<!--
-		<a href="#"> <img src="./logo.png" width="30%" title="B1" /> </a>
-		<a href="#"> <img src="./logo.png" width="30%" title="B2" /> </a>
-		<a href="#"> <img src="./logo.png" width="30%" title="B3" /> </a>
-		<dl></dl>
-		<a href="#"> <img src="./logo.png" width="30%" title="B4" /> </a>
-		<a href="#"> <img src="./logo.png" width="30%" title="B5" /> </a>
-		<a href="#"> <img src="./logo.png" width="30%" title="B6" /> </a>
-		-->
+	<div>
+      	<tr>
+         <td><img src="/static/img/10002.jpg" height="120px" width="150px" /></td>
+         <td><img src="/static/img/10008.jpg" height="120px" width="150px" /></td>
+         <td><img src="/static/img/10020.jpg" height="120px" width="150px" /></td>
+      	</tr>
+	<tr>
+         <th>폴리폴라 네이비</th>
+         <th>봉쁘앙티셔츠 옐로우</th>
+         <th>엉클원피스 그레이</th>
+	</tr>
 	</div>
-	<div class="community">
-		community
-	<!--
-		<table border="2px solid #333">
-		<tr class="aa">
-		<th><span>번호</span></th>
-		<th><span>제목</span></th>
-		<th><span>작성자</span></th>
-		<th><span>작성일</span></th>
-		<th><span>조회수</span></th>
+	</tbody>
+	</table>
+	</div>
+	<p>
+	<div class="community"> <H4>▶ COMMNUNITY</H4>
+	<p>
+	<p>
+	<table class="table table-striped table-hover table-condensed" style="table-layout:fixed">
+	<thead>
+		<tr class="text-center">
+		<th width='150px' style='word-break:break-all'>제목</th>
+		<th width='80px' style='word-break:break-all'>작성자</th>
+		<th width='100px' style='word-break:break-all'>날짜</th>
 		</tr>
-		<tr> <td>1</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td></tr>
-		<tr> <td>2</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td></tr>
-		</table>
-	-->
+	</thead>
+	<tbody>
+	<div>
+	{% for row in data %}
+      	<tr>
+         <td><a href="{{url_for('readBoard',number = row[0])}}">{{ row[1] }}</a></td>
+         <td>{{ row[3] }}</td>
+         <td>{{ row[4] }}</td>
+      	</tr>
+	{% endfor %}
 	</div>
-	<div class="cart">
-		cart
+	</tbody>
+	</table>
 	</div>
   </section>
-
-
-  <footer>
-      About My Dog
-  </footer>
-
+</div>
+<div class="cart">
+  <center>
+    cart
+  </center>
+</div>
   </body>
   </html>

@@ -67,27 +67,59 @@
                     </div>
 
        </Header>
-       <nav id="page-wrapper">
-         <ul class="sidebar-nav">
-           <li class="sidebar-brand">
-             <font color="white">Category</font>
-           </li>
-               <li><a href="{{url_for('category',number='1')}}">옷</a></li>
-               <li><a href="{{url_for('category',number='2')}}">사료</a></li>
-               <li><a href="{{url_for('category',number='3')}}">간식</a></li>
-               <li><a href="{{url_for('category',number='4')}}">장난감</a></li>
-               <li><a href="{{url_for('category',number='5')}}">목욕용품</a></li>
+  <nav>
 
-         </ul>
-       </nav>
+  Side Menu
+  <!--
+	<ul>
+	    <li><a href="#">Product</a></li>
+    </ul>
+	-->
+  </nav>
+	<section border="1" style="text-align: left" >
+	<div class="writer">
+	<p>
+	<h5>▶ 카드 결제</h5>
+	<hr/>
+	<p>
+	<div class="container">
+	<div class="table-responsive">
+	<table class="table table-bordered table-condensed">
+      <tbody>
+  		  <form action = "/payment_card/" method="POST">
+        <tr>
+          <th>카드번호: </th>
+          <td><input type ="text" name = "cardnum_1" style="width:70px"/> - <input type ="password" name = "cardnum_2" style="width:70px"/> - <input type ="password" name = "cardnum_3" style="width:70px"/> - <input type ="text" name = "cardnum_4" style="width:70px"/></td>
+        </tr>
+        <tr>
+          <th>CVC번호: </th>
+          <td><input type ="password" name = "cardcvc" style="width:150px"/></td>
+        </tr>
+        <tr>
+          <th>유효기간: </th>
+          <td><input type ="text" name = "card_month" style="width:70px"/> / <input type ="text" name = "card_year" style="width:70px"/></td>
+     	 </tr>
+     	 <tr>
+          <th>할부개월: </th>
+          <td><select class="form-control" style="width:200px">
+			<option>일시불</option><option>3개월</option><option>6개월</option><option>12개월</option></select></td>
+     	 </tr>
 
-	<section border="1">
-    <form action = "/Authenticate/" method="POST">
-      <br><br><br><br><br><br><br><br><br><br><br><br>
-      ID :       <input type ="text" name = "ID"/> <br><br>
-      Password : <input type ="password" name = "PW"/> <br><br>
-      <button type="submit">로그인</button>
-    </form>
+     	 <tr>
+        <td style="border:0px" solid=white; align="right">
+          <span class="input-group-btn pull-right"></td>
+            <td style="border:0px" solid=white; align="right"><button class="btn btn-sm pull-right" id="cancel" name ="button" value = "cancel">취소</button></span>
+              <button class="btn btn-sm btn-danger pull-right" id="pay" name = "button" value = "pay">결제</button> </span>
+            </td>
+          </tr>
+
+        </form>
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+
 	</section>
   </body>
   </html>
