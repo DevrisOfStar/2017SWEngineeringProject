@@ -1,116 +1,122 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <Head>
-<title>
-    {% if username %}
-      About My Dog - Hello, {{username}}
-    {% else %}
-      About My Dog - Not Logged
-    {% endif %}
-</title>
+<title>{% if username %} About My Dog - Hello, {{username}} {%
+	else %} About My Dog - Not Logged {% endif %}</title>
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <strong>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/board.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/page.css') }}">
-  </strong>
+<strong>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</strong>
 
 </Head>
 
 <body>
-       <Header>
-           <div class="logo">
-             <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
-           </div>
-           <div class="search">
-                     <form action='/search' method='POST'>
-                 <span class="input-group-btn pull-right">
-                           <input type="text" name="searchBar" class="form-control" placeholder="Search" size="90" >
-                 <button class="btn btn-danger" type="submit" id="mySearch" onclick="location.href='#'"  style="height:40px; width:60px;">검색</button>
-                 </span>
-                     </form>
-                      </div>
-                      {% if username%} <!-- 로그인 상태 -->
-                     <div class="logout" style="float:right;padding-top:20px;">
-                       <form action ="/logout/" style="float:right;display:inline;">
-                         <button type="submit" id="Logout">Logout</button>
-                       </form>
-                       {{username}} 님 환영합니다.
-                     </div>
-                     {% else %}
-                     <div class="login">
-                    <form action ="/login/" style="display:inline;">
-                     <button type="submit" id="Login">Login</button>
-                    </form>
-                    <form action ="/signup/" style="display:inline;">
-                     <button type="submit" id="SignUp">SignUp</button>
-                    </form>
-                    </div>
-                       {% endif %}
-                     <div class = "menu">
-                     <strong>
-                         <ul>
-                           <li><a href="{{url_for('bestproduct')}}">베스트상품</a></li>
-                           <li><a href="{{url_for('search')}}">애완용품</a></li>
-                           <li><a href="{{url_for('community')}}">COMMUNITY</a></li>
-                          {% if username == "admin" %}
-                           <li><a href="{{url_for('admin')}}">ADMIN PAGE</a></li>
-                           {% else %}
-                           <li><a href="{{url_for('mypage')}}">MY PAGE</a></li>
-                           {% endif %}
-                         </ul>
-                       </strong>
-                    </div>
+	<Header>
+		<div class="logo">
+			<a href="{{url_for('home')}}"><img
+				src="{{url_for('static',filename='img/logo.png')}}" height="120px"
+				title="Home" /></a>
+		</div>
+		<div class="search">
+			<form action='/search' method='POST'>
+				<div style="width: 90%;">
+					<div style="width: 85%; float: left; vertical-align: middle;">
+						<input type="text" name="searchBar" class="form-control" placeholder="Search" size="90">
+					</div>
+					<div style="width: 10%; float: left; margin-left: 10px;">
+						<button class="btn btn-danger btn-md pull-right" type="submit" id="mySearch" onclick="location.href='#'">검색</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		{% if username%}
+		<!-- 로그인 상태 -->
+		<div class="logout"
+			style="float: right; padding-top: 20px; color: white">
+			<form action="/logout/" style="float: right; display: inline;">
+				<button style="color: #002266; margin-left: 20px;" type="submit" id="Logout">Logout</button>
+			</form>
+			<font size="3"> {{username}} 님 환영합니다. </font>
+		</div>
+		{% else %}
+		<div class="login">
+			<form action="/login/" style="display: inline;">
+				<button type="submit" id="Login">Login</button>
+			</form>
+			<form action="/signup/" style="display: inline;">
+				<button type="submit" id="SignUp">SignUp</button>
+			</form>
+		</div>
+		{% endif %}
+		<div class="menu">
+			<strong>
+				<ul>
+					<li><a href="{{url_for('bestproduct')}}">베스트상품</a></li>
+					<li><a href="{{url_for('search')}}">애완용품</a></li>
+					<li><a href="{{url_for('community')}}">COMMUNITY</a></li> 
+					{% if username == "admin" %}
+					<li><a href="{{url_for('admin')}}">ADMIN PAGE</a></li> 
+					{% else %}
+					<li><a href="{{url_for('mypage')}}">MY PAGE</a></li> 
+					{% endif %}
+				</ul>
+			</strong>
+		</div>
 
-       </Header>
-  <nav>
+	</Header>
+	<nav>
 
-  Side Menu
-  <!--
+		
+		<!--
 	<ul>
 	    <li><a href="#">Product</a></li>
     </ul>
 	-->
-  </nav>
-	<section border="1" style="text-align: left" >
-	<div class="writer">
-	<p>
-	<h5>▶ 무통장 입금</h5>
-	<hr/>
-	<p>
-	<div class="container">
-	<div class="table-responsive">
-	<table class="table table-bordered table-condensed">
-      <tbody>
-  		  <form action = "/payment_bank/" method="POST">
-        <tr>
-          <th>은행 선택: </th>
-           <td><select class="form-control" style="width:200px">
-			<option>KB 국민은행</option><option>신한은행</option><option>우리은행</option><option>기업은행</option></select><option>농협</option></select></td>
-		</tr>
-		<tr>
-          <th>입금자명: </th>
-          <td><input type ="text" name = "name" style="width:200px"/></td>
-        </tr>
+	</nav>
+	<section border="1" style="text-align: left">
+		<div class="writer">
+			<p>
+			<h5>▶ 무통장 입금</h5>
+			<hr />
+			<p>
+			<div class="container">
+				<div class="table-responsive">
+					<table class="table table-bordered table-condensed">
+						<tbody>
+							<form action="/payment_bank/" method="POST">
+								<tr>
+									<th>은행 선택:</th>
+									<td><select class="form-control" style="width: 200px">
+											<option>KB 국민은행</option>
+											<option>신한은행</option>
+											<option>우리은행</option>
+											<option>기업은행</option>
+											<option>농협</option>
+									</select>
+									</td>
+								</tr>
+								<tr>
+									<th>입금자명:</th>
+									<td><input type="text" name="name" style="width: 200px" /></td>
+								</tr>
 
-     	 <tr>
-        <td style="border:0px" solid=white; align="right">
-          <span class="input-group-btn pull-right"></td>
-            <td style="border:0px" solid=white; align="right"><button class="btn btn-sm pull-right" id="cancel" name ="button" value = "cancel">취소</button></span>
-              <button class="btn btn-sm btn-danger pull-right" id="pay" name = "button" value = "pay">결제</button> </span>
-            </td>
-          </tr>
-
-        </form>
-    </tbody>
-</table>
-</div>
-</div>
-</div>
+								<tr>
+									<td style="border: 0px" solid=white; align="right"><span class="input-group-btn pull-right"></td>
+									<td style="border: 0px" solid=white; align="right"><button class="btn btn-sm pull-right" id="cancel" name="button" value="cancel">취소</button>
+										</span>
+										<button class="btn btn-sm btn-danger pull-right" id="pay" name="button" value="pay">결제</button> </span></td>
+								</tr>
+							</form>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</section>
-  </body>
-  </html>
+</body>
+</html>

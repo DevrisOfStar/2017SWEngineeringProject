@@ -1,150 +1,144 @@
 ﻿<!DOCTYPE html>
-<html lang = "ko">
+<html lang="ko">
 <Head>
 <title>About My Dog</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	-->
 <strong>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/board.css') }}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </strong>
 
 </Head>
 
 <body>
-  <Header>
-      <div class="logo">
-          <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
-      </div>
-      <div class="search">
-                <form action='/search' method='POST'>
-            <span class="input-group-btn pull-right">
-                      <input type="text" name="searchBar" class="form-control" placeholder="Search" size="90" >
-            <button class="btn btn-danger" type="submit" id="mySearch" onclick="location.href='#'"  style="height:40px; width:60px;">검색</button>
-            </span>
-                </form>
-                 </div>
-                 {% if username%} <!-- 로그인 상태 -->
-                <div class="logout" style="float:right;padding-top:20px;">
-                  <form action ="/logout/" style="float:right;display:inline;">
-                    <button type="submit" id="Logout">Logout</button>
-                  </form>
-                  {{username}} 님 환영합니다.
-                </div>
-                {% else %}
-                <div class="login">
-              <form action ="/login/" style="display:inline;">
-                <button type="submit" id="Login">Login</button>
-              </form>
-              <form action ="/signup/" style="display:inline;">
-                <button type="submit" id="SignUp">SignUp</button>
-              </form>
-              </div>
-                  {% endif %}
-                <div class = "menu">
-                <strong>
-                    <ul>
-                      <li><a href="{{url_for('bestproduct')}}">베스트상품</a></li>
-                      <li><a href="{{url_for('search')}}">애완용품</a></li>
-                      <li><a href="{{url_for('community')}}">COMMUNITY</a></li>
-                     {% if username == "admin" %}
-                      <li><a href="{{url_for('admin')}}">ADMIN PAGE</a></li>
-                      {% else %}
-                      <li><a href="{{url_for('mypage')}}">MY PAGE</a></li>
-                      {% endif %}
-                    </ul>
-                  </strong>
-             </div>
+	<Header>
+		<div class="logo">
+			<a href="{{url_for('home')}}"><img src="{{url_for('static',filename='img/logo.png')}}" height="120px" title="Home" /></a>
+		</div>
+		<div class="search">
+			<form action='/search' method='POST'>
+				<div style="width: 90%;">
+					<div style="width: 85%; float: left; vertical-align: middle;">
+						<input type="text" name="searchBar" class="form-control" placeholder="Search" size="90">
+					</div>
+					<div style="width: 10%; float: left; margin-left: 10px;">
+						<button class="btn btn-danger btn-md pull-right" type="submit" id="mySearch" onclick="location.href='#'">검색</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		{% if username%}
+		<!-- 로그인 상태 -->
+		<div class="logout"
+			style="float: right; padding-top: 20px; color: white">
+			<form action="/logout/" style="float: right; display: inline;">
+				<button style="color: #002266; margin-left: 20px;" type="submit" id="Logout">Logout</button>
+			</form>
+			<font size="3"> {{username}} 님 환영합니다. </font>
+		</div>
+		{% else %}
+		<div class="login">
+			<form action="/login/" style="display: inline;">
+				<button type="submit" id="Login">Login</button>
+			</form>
+			<form action="/signup/" style="display: inline;">
+				<button type="submit" id="SignUp">SignUp</button>
+			</form>
+		</div>
+		{% endif %}
+		<div class="menu">
+			<strong>
+				<ul>
+					<li><a href="{{url_for('bestproduct')}}">베스트상품</a></li>
+					<li><a href="{{url_for('search')}}">애완용품</a></li>
+					<li><a href="{{url_for('community')}}">COMMUNITY</a></li> 
+					{% if username == "admin" %}
+					<li><a href="{{url_for('admin')}}">ADMIN PAGE</a></li> 
+					{% else %}
+					<li><a href="{{url_for('mypage')}}">MY PAGE</a></li> 
+					{% endif %}
+				</ul>
+			</strong>
+		</div>
 
-  </Header>
+	</Header>
 
-  <div id="page-wrapper">
-  <!-- 사이드바 -->
-  <nav id="page-wrapper">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-        <font color="white">My Page</font>
-      </li>
-      <li><a href="{{url_for('myorder')}}">주문내역</a></li>
-      <li><a href="{{url_for('myrevise')}}">회원정보수정</a></li>
-    </ul>
-  </nav>
-  <!-- /사이드바 -->
+	<div id="page-wrapper">
+		<!-- 사이드바 -->
+		<nav id="page-wrapper">
+			<ul class="sidebar-nav">
+		    	<li class="sidebar-brand"><font color="#4C4C4C">My Page</font></li>
+				<li><a href="{{url_for('myorder')}}">주문내역</a></li>
+				<li><a href="{{url_for('myrevise')}}">회원정보수정</a></li>
+			</ul>
+		</nav>
+		<!-- /사이드바 -->
 
-	<section border="1">
-	<div class="list"  >
-	<p>
-	<h5 align="left">▶ 회원정보 수정</h5>
-	<p align="left">
-	<hr/>
-	<div class="container">
-	<div class="table-responsive">
-  <form action= "/vertify/">
-    <table class="table table-bordered table-condensed">
-{% for row in data %}
-      <tbody>
-        <tr>
-          <th>ID</th>
-          <td>{{username}}</td >
-          </tr>
-          <tr>
-            <th>비밀번호 </th>
-            <td><input type="password" placeholder="비밀번호를 입력하세요. (영어 소문자, 숫자 포함 4-12자리)" name="password" class="form-control"/></td>
-          </tr>
-          <tr>
-            <th>비밀번호 확인</th>
-            <td><input type="password" placeholder="비밀번호를 다시 입력하세요. " name="password2" class="form-control"/></td>
-          </tr>
+		<section border="1">
+			<div class="list">
+				<p>
+				<h5 align="left">▶ 회원정보 수정</h5>
+				<p align="left">
+				<hr />
+				<div class="container">
+					<div class="table-responsive">
+						<form action="/vertify/">
+							<table class="table table-bordered table-condensed">
+								{% for row in data %}
+								<tbody>
+									<tr>
+										<th>ID</th>
+										<td>{{username}}</td>
+									</tr>
+									<tr>
+										<th>비밀번호</th>
+										<td><input type="password" placeholder="비밀번호를 입력하세요. (영어 소문자, 숫자 포함 4-12자리)" name="password" class="form-control" /></td>
+									</tr>
+									<tr>
+										<th>비밀번호 확인</th>
+										<td><input type="password" placeholder="비밀번호를 다시 입력하세요. " name="password2" class="form-control" /></td>
+									</tr>
 
-          <tr>
-            <th>이름</th>
-            <td><input type="text" placeholder="이름을 입력하세요. " value="{{row[3]}}" name="name" class="form-control"/></td>
-          </tr>
-          <tr>
-            <th>주소</th>
-            <td><input type="zipcode" placeholder="ZipCode " name="zipcode" value="{{row[7]}}" class="form-control">
-              <input type="text" placeholder="Address " name="address1" value="{{row[4]}}" class="form-control">
-              <input type="text" placeholder="detail Address " name="address2" value="{{row[4]}}" class="form-control"></td>
-            </tr>
-            <tr>
-              <th>전화번호</th>
-              <td><input type="text" placeholder="전화번호를 입력하세요. " name="phonenum" value="{{row[5]}}" class="form-control"/></td>
-            </tr>
-            <tr>
-              <th>E-mail</th>
-              <td><input type="text" placeholder="이메일 주소를 입력하세요. " name="email" value="{{row[6]}}" class="form-control"/></td>
-            </tr>
+									<tr>
+										<th>이름</th>
+										<td><input type="text" placeholder="이름을 입력하세요. " value="{{row[3]}}" name="name" class="form-control" /></td>
+									</tr>
+									<tr>
+										<th>주소</th>
+										<td><input type="zipcode" placeholder="ZipCode " name="zipcode" value="{{row[7]}}" class="form-control">
+											<input type="text" placeholder="Address " name="address1" value="{{row[4]}}" class="form-control"> 
+											<input type="text" placeholder="detail Address " name="address2" value="{{row[4]}}" class="form-control">
+										</td>
+									</tr>
+									<tr>
+										<th>전화번호</th>
+										<td><input type="text" placeholder="전화번호를 입력하세요. " name="phonenum" value="{{row[5]}}" class="form-control" /></td>
+									</tr>
+									<tr>
+										<th>E-mail</th>
+										<td><input type="text" placeholder="이메일 주소를 입력하세요. " name="email" value="{{row[6]}}" class="form-control" /></td>
+									</tr>
 
-            <tr>
-              <td style="border:0px" solid=white; align="right">
-                <td style="border:0px" solid=white; align="right">
-                  <button class="btn btn-sm pull-right" value = "1" name = "button" type="submit" id="cancel_revise">취소</button> </span>
-                  <button class="btn btn-sm pull-right" value = "2" name = "button" type="submit">저장</button></span>
-                  <button class="btn btn-sm pull-right" value = "3" name = "button" type="submit" id="out">탈퇴</button> </span>
-                </td>
-              </tr>
-            </tbody>
-            {% endfor %}
-          </table>
-  </form>
-    <hr/>
-	</div>
-	</div>
-
-
-
-	</section>
-
-
-
+									<tr>
+										<td style="border: 0px" solid=white; align="right">
+										<td style="border: 0px" solid=white; align="right">
+											<button class="btn btn-sm pull-right" value="1" name="button" type="submit" id="cancel_revise">취소</button> </span>
+											<button class="btn btn-sm pull-right" value="2" name="button" type="submit">저장</button>
+											</span>
+											<button class="btn btn-sm pull-right" value="3" name="button" type="submit" id="out">탈퇴</button> </span>
+										</td>
+									</tr>
+								</tbody>
+								{% endfor %}
+							</table>
+						</form>
+						<hr />
+					</div>
+				</div>
+		</section>
 </body>
 
 </html>

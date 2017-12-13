@@ -1,82 +1,76 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 
 <nav id="page-wrapper">
-  <ul class="sidebar-nav">
-    <li class="sidebar-brand">
-      <font color="white">Category</font>
-    </li>
+	<ul class="sidebar-nav">
+		<li class="sidebar-brand"><font color="#4C4C4C">Category</font></li>
 
 
-        <li><a href="{{url_for('category',number='1')}}">옷</a></li>
-        <li><a href="{{url_for('category',number='2')}}">사료</a></li>
-        <li><a href="{{url_for('category',number='3')}}">간식</a></li>
-        <li><a href="{{url_for('category',number='4')}}">장난감</a></li>
-        <li><a href="{{url_for('category',number='5')}}">목욕용품</a></li>
+		<li><a href="{{url_for('category',number='1')}}">옷</a></li>
+		<li><a href="{{url_for('category',number='2')}}">사료</a></li>
+		<li><a href="{{url_for('category',number='3')}}">간식</a></li>
+		<li><a href="{{url_for('category',number='4')}}">장난감</a></li>
+		<li><a href="{{url_for('category',number='5')}}">목욕용품</a></li>
 
-  </ul>
+	</ul>
 </nav>
 
 <section>
 	<div class="writer">
-	<p>
-	<h5>▶ 회원 가입</h5>
-	<hr/>
-	<p>
-
-	<div class="container">
-	<div class="table-responsive">
-    <table class="table table-bordered table-condensed">
-      <tbody>
-        <form action='/signup_verify/' method="POST">
-        <tr>
-            <th>ID</th>
-            <td>
-                <input type="text" placeholder="아이디를 입력하세요." name="ID" width="400px"/>
-                <button class="btn" id="idcheck" name="button" value ="verify" onclick="location.href='#' pull-right">중복확인</button>
-              </td>
-          </tr>
-          <tr>
-            <th>비밀번호</th>
-            <td><input type="password" placeholder="비밀번호를 입력하세요. (4-12자리 영소문자, 숫자 조합)" name="password" class="form-control"/></td>
-          </tr>
-          <tr>
-            <th>비밀번호 확인</th>
-            <td><input type="password" placeholder="비밀번호를 한번 더 입력하세요. " name="password2" class="form-control"/></td>
-          </tr>
-          <tr>
-            <th>이름</th>
-            <td><input type="text" placeholder="이름을 입력하세요." name="name" class="form-control"/></td>
-          </tr>
-          <tr>
-            <th>주소</th>
-            <td><input type="text" placeholder="우편번호를 입력하세요. " name="zipcode" class="form-control"/>
-              <input type="text" placeholder="주소를 입력하세요. " name="address1" class="form-control"/>
-              <input type="text" placeholder="상세주소를 입력하세요. " name="address2" class="form-control"/></td>
-            </tr>
-            <tr>
-              <th>전화번호</th>
-              <td><input type="text" placeholder="전화번호를 하이픈 없이 입력하세요." name="phoneNum" class="form-control"/></td>
-            </td>
-          </tr>
-          <tr>
-            <th>E-mail</th>
-            <td><input type="text" placeholder="이메일 주소를 입력하세요. " name="email" class="form-control"/></td>
-          </tr>
-          <tr>
-            <td style="border:0px" solid=white; align="right">
-             <td style="border:0px" solid=white; align="right">
-              <button class="btn btn-sm pull-right" name="button" value ="save">저장</button></span>
-              <button class="btn btn-sm pull-right" name="button" value ="cancel" id="writer">취소</button> </span>
-             </td>
-           </td>
-         </tr>
-       </form>
-      </tbody>
-    </table>
-</div>
-</div>
-</div>
-  </section>
+		<p>
+		<h5>▶ 회원 가입</h5>
+		<hr />
+		<p>
+		<div class="container">
+			<div class="table-responsive">
+				<table class="table table-bordered table-condensed">
+					<tbody>
+						<form action='/signup_verify/' method="POST">
+							<tr>
+								<th>ID</th>
+								<td><input type="text" placeholder="아이디를 입력하세요." name="ID" width="400px" />
+									<button class="btn" id="idcheck" name="button" value="verify" onclick="location.href='#' pull-right">중복확인</button></td>
+							</tr>
+							<tr>
+								<th>비밀번호</th>
+								<td><input type="password" placeholder="비밀번호를 입력하세요. (4-12자리 영소문자, 숫자 조합)" name="password" class="form-control" /></td>
+							</tr>
+							<tr>
+								<th>비밀번호 확인</th>
+								<td><input type="password" placeholder="비밀번호를 한번 더 입력하세요. " name="password2" class="form-control" /></td>
+							</tr>
+							<tr>
+								<th>이름</th>
+								<td><input type="text" placeholder="이름을 입력하세요." name="name" class="form-control" /></td>
+							</tr>
+							<tr>
+								<th>주소</th>
+								<td><input type="text" placeholder="우편번호를 입력하세요. " name="zipcode" class="form-control" /> 
+								<input type="text" placeholder="주소를 입력하세요. " name="address1" class="form-control" />
+								<input type="text" placeholder="상세주소를 입력하세요. " name="address2" class="form-control" /></td>
+							</tr>
+							<tr>
+								<th>전화번호</th>
+								<td><input type="text" placeholder="전화번호를 하이픈 없이 입력하세요." name="phoneNum" class="form-control" /></td>
+							</tr>
+							<tr>
+								<th>E-mail</th>
+								<td><input type="text" placeholder="이메일 주소를 입력하세요. " name="email" class="form-control" /></td>
+							</tr>
+							<tr>
+								<td style="border: 0px" solid=white; align="right">
+								<td style="border: 0px" solid=white; align="right">
+									<button class="btn btn-sm pull-right" name="button" value="save">저장</button>
+									</span>
+									<button class="btn btn-sm pull-right" name="button" value="cancel" id="writer">취소</button> </span>
+								</td>
+								</td>
+							</tr>
+						</form>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</section>
 
 {% endblock %}

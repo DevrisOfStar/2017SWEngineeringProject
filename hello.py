@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys
 import string
@@ -33,7 +33,7 @@ def home(username = None) : # get userName in index
     cursor = mysql.connect().cursor()
     cursor.execute("SELECT * from board_table LIMIT 5")
     data = cursor.fetchall()
-    cursor.execute("SELECT * FROM item_table LIMIT 6 ")
+    cursor.execute("SELECT * FROM item_table LIMIT 6")
     item = cursor.fetchall()
 
     if 'username' in session :
@@ -216,25 +216,22 @@ def order() : # 주문 - 결제 부분
     amount = request.values.get('amount') # 총계
     counts = request.values.get('counts') # 주문 개수
     item = request.values.get('item')
+    if 'username' in session :
+        username = session['username']
+    else :
+        return render_template('login.html')
+
     if button == "card" :
-        return render_template('payment_card.html',amount=amount)
+        return render_template('payment_card.html',amount=amount,username = username)
     if button == "bank" :
-        return render_template('payment_bank.html',amount=amount)
+        return render_template('payment_bank.html',amount=amount,username = username)
     if button == "insert" :
-        if 'username' in session :
-            username = session['username']
-        else :
-            return render_template('login.html')
         conn = mysql.connect()
         cursor = conn.cursor()
         cursor.execute("update cart_table set amount = %s where item_id=%s and mem_id = %s",(counts,item,username))
         conn.commit()
         return "<script>alert('물품을 수정하였습니다.'); history.back();</script>"
     if button == "delete" :
-        if 'username' in session :
-            username = session['username']
-        else :
-            return render_template('login.html')
         conn = mysql.connect()
         cursor = conn.cursor()
         cursor.execute("delete from cart_table where item_id = %s and mem_id = %s",(item,username))
@@ -243,7 +240,7 @@ def order() : # 주문 - 결제 부분
     if button == "cancel" :
         return render_template('search_result.html')
     if button == "order" :
-        return  "<script>alert('취소를 누르고, 장바구니담기 버튼을 눌러주세요.'); history.back();</script>"
+        return "<script>alert('취소를 누르고, 장바구니담기 버튼을 눌러주세요.'); history.back();</script>"
 
 
 @app.route('/payment_card/', methods=['GET','POST']) # 구현 부족
@@ -255,6 +252,10 @@ def paymentcard() : # 결제 부분 - 카드결제 or 무통장입금
     cardcvc = request.values.get('cardcvc')
     cardmonth = request.values.get('cardmonth')
 
+    button = request.values.get('button')
+    if button == "cancel" :
+        return render_template('mypage.html')
+
     if not (cardnum_1 and cardnum_2 and cardnum_3 and cardnum_4 and cardcvc and cardmonth) :
         return "<script>alert('빈공간이 존재합니다.'); history.back();</script>"
     else :
@@ -263,11 +264,14 @@ def paymentcard() : # 결제 부분 - 카드결제 or 무통장입금
 @app.route('/payment_bank/',methods=['GET','POST']) # 구현 부족
 def paymentbank() :
     name = request.values.get('name')
+    button = request.values.get('button')
+    if button == "cancel" :
+        return render_template('mypage.html')
 
     if not (name) :
         return "<script>alert('빈공간이 존재합니다.'); history.back();</script>"
     else :
-        return : "<script>alert('계좌번호 : 123-456-7890 (국민)으로 입금부탁드립니다.'); history.back();</script>"
+        return "<script>alert('계좌번호 : 123-456-7890 (국민)으로 입금부탁드립니다.'); history.back();</script>"
 # community 부분
 @app.route('/community/',methods=['GET','POST']) # 완료
 def community():
