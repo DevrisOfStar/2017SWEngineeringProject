@@ -9,7 +9,7 @@ from flaskext.mysql import MySQL
 mysql = MySQL() # 안녕
 app = Flask(__name__)
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'melting75'
+app.config['MYSQL_DATABASE_PASSWORD'] = '-'
 app.config['MYSQL_DATABASE_DB'] = 'aboutmydog'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
