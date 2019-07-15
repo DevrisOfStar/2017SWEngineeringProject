@@ -18,7 +18,7 @@ app.secret_key = '#ekd@aA/3g dE~2A!jEdH.,!RA' #Secret key in Session
 # mysql 초기설정
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'melting7.5'
+app.config['MYSQL_DATABASE_PASSWORD'] = '-'
 app.config['MYSQL_DATABASE_DB'] = 'aboutmydog'
 app.config['MYSQL_DATABASE_HOST'] = '210.89.180.38'
 mysql.init_app(app)
